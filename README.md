@@ -72,6 +72,14 @@ python3 -m http.server 8765
 
 and open <http://localhost:8765>. Opening `index.html` straight from the disk works too.
 
+The build number shown in the footer (`v…`, before the copyright) lives in the
+[`VERSION`](VERSION) file and is mirrored in the three HTML pages. A `pre-commit` hook bumps it
+by one on every commit; install it once after cloning with:
+
+```
+tools/hooks/install.sh
+```
+
 ## Project layout
 
 | Path | Content |

@@ -1,0 +1,45 @@
+#!/bin/sh
+#
+# Bump the build number on every commit.
+#
+# The number lives in the VERSION file at the repo root and is mirrored into
+# the footer of every page (<span class="version"> in the HTML files). GitHub
+# Pages redeploys on every push, so "one bump per commit" is what shows up live.
+#
+# Install with tools/hooks/install.sh (copies this file to .git/hooks/).
+
+set -e
+
+root=$(git rev-parse --show-toplevel)
+git_dir=$(git rev-parse --git-dir)
+
+# Nothing staged (e.g. `git commit` with an empty index): let git handle it,
+# don't create a bump out of thin air.
+if git diff --cached --quiet; then
+  exit 0
+fi
+
+# Merges, rebases and cherry-picks replay or synthesise commits; bumping on each
+# one would burn through numbers and churn the pages. Skip them.
+if [ -e "$git_dir/MERGE_HEAD" ] || \
+   [ -e "$git_dir/CHERRY_PICK_HEAD" ] || \
+   [ -d "$git_dir/rebase-merge" ] || \
+   [ -d "$git_dir/rebase-apply" ]; then
+  exit 0
+fi
+
+version_file="$root/VERSION"
+
+current=$(tr -cd '0-9' < "$version_file" 2>/dev/null || true)
+[ -n "$current" ] || current=0
+next=$((current + 1))
+
+printf '%s\n' "$next" > "$version_file"
+for page in index.html privacy.html licence.html; do
+  perl -0pi -e 's{(<span class="version">)v\d+}{${1}v'"$next"'}' "$root/$page"
+  git add "$root/$page"
+done
+
+git add "$version_file"
+
+echo "pre-commit: build number -> v$next"
