@@ -80,6 +80,15 @@ by one on every commit; install it once after cloning with:
 tools/hooks/install.sh
 ```
 
+## Security
+
+Every page declares a Content Security Policy and a Referrer Policy with `<meta>` tags in the
+`<head>`: the browser loads only resources from this site, plus the GoatCounter script and its
+counting endpoint on the plotter page. The privacy and licence pages load nothing external.
+
+Headers such as `X-Frame-Options`, `X-Content-Type-Options`, `Permissions-Policy` and the
+`frame-ancestors` directive travel only as HTTP headers, which GitHub Pages does not let you set.
+
 ## Project layout
 
 | Path | Content |

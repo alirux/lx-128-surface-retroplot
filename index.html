@@ -3,6 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Content security policy: the page may load only resources from this site,
+       plus the GoatCounter script for the anonymous visit count. No iframes, no
+       eval. Headers such as X-Frame-Options, X-Content-Type-Options and
+       Permissions-Policy can only be sent as HTTP headers, which GitHub Pages
+       does not allow. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' https://lirux-lx128.goatcounter.com; connect-src https://lirux-lx128.goatcounter.com; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Lirux 3D</title>
   <meta name="description" content="LX-128 Surface Retroplot: type a formula and get a 3D surface, real or complex, on an 80s home computer screen.">
   <link rel="canonical" href="https://alirux.github.io/lx-128-surface-retroplot/">
@@ -69,7 +76,7 @@
     <p class="hint">DRAG TO ROTATE &middot; WHEEL TO ZOOM &middot; TYPE <kbd>HELP</kbd> AND PRESS <kbd>RETURN</kbd></p>
 
     <footer class="credits">
-      <span class="version">v7</span>
+      <span class="version">v8</span>
       <span>&copy; 2026 ALBERTO "LIRUX" LIRUSSI</span>
       <a href="privacy.html">PRIVACY</a>
       <a href="licence.html">LICENCE</a>

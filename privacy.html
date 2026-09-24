@@ -3,6 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Content security policy: only resources from this site. The legal pages
+       do not even load the visit counter. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Privacy · Lirux 3D</title>
   <meta name="description" content="Privacy notice of LIRUX 3D.">
   <link rel="icon" href="favicon.ico" sizes="32x32">
@@ -155,7 +159,7 @@
     </nav>
 
     <footer class="credits">
-      <span class="version">v7</span>
+      <span class="version">v8</span>
       <span>&copy; 2026 ALBERTO "LIRUX" LIRUSSI</span>
       <a href="./">LIRUX 3D</a>
       <a href="licence.html">LICENCE</a>
@@ -166,11 +170,6 @@
     </footer>
   </main>
 
-  <script>
-    // ESC goes back to the plotter, like the key under the monitor.
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') location.href = './';
-    });
-  </script>
+  <script src="js/back.js"></script>
 </body>
 </html>

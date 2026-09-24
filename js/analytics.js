@@ -11,7 +11,7 @@
  */
 (function () {
   'use strict';
-  var ENDPOINT = 'https://lirux.goatcounter.com/count';
+  var ENDPOINT = 'https://lirux-lx128.goatcounter.com/count';
 
   window.goatcounter = { endpoint: ENDPOINT };
 
