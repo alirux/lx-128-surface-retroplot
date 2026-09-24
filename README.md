@@ -10,8 +10,8 @@ A 3D function plotter disguised as an 80s home computer with its monitor. You ty
 `sin(x)*cos(y)` at the `READY.` prompt and the machine draws the surface with chunky pixels,
 ordered dithering and hidden line removal, on a screen with scanlines and phosphor glow.
 
-It is a single static page: plain HTML, CSS and JavaScript, no build step, no dependencies, no
-network calls. The surface is rasterised in software into a tiny pixel buffer and only scaled up
+It is a single static page: plain HTML, CSS and JavaScript, no build step, no dependencies. The
+only network call is an anonymous, cookieless visit counter (GoatCounter). The surface is rasterised in software into a tiny pixel buffer and only scaled up
 by the browser.
 
 ## Three machines, one plotter
@@ -88,6 +88,7 @@ tools/hooks/install.sh
 | `js/parser.js` | formula parser, real and complex arithmetic, gamma function |
 | `js/render.js` | software rasteriser: z-buffer, dithering, bitmap font |
 | `js/app.js` | the machines: command line, boot sequences, keys, easter egg |
+| `js/analytics.js` | anonymous visit counting with GoatCounter |
 | `privacy.html`, `licence.html` | privacy and licence notices, as man pages |
 | `fonts/` | the two typefaces, served from the site |
 | `assets/` | screenshots and social card |
