@@ -453,6 +453,9 @@
     const extra = state.machine === 'c128'
       ? '  GO64  TERM (DIAL THE MAINFRAME)  RESET'
       : '  TERM (DIAL THE MAINFRAME)\n  RESET (BACK TO 128 MODE)';
+    // The build number comes from the footer, which the pre-commit hook keeps up to date.
+    const v = (document.querySelector('.version') || {}).textContent || '';
+    print(`LX-128 SURFACE RETROPLOT  BUILD ${v.replace(/^v/i, '')}\n`, 'center');
     print(HELP_BASIC.concat(extra, '', 'SHALL WE PLAY A GAME? TERM, THEN LOGIN').join('\n'));
   }
 
