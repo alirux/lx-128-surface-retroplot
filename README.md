@@ -59,8 +59,14 @@ The formula is kept in the address after `#`, so a link shares a plot:
 Drag to rotate, use the wheel to zoom, or the arrow keys on the plot. The F1 to F8 keys under
 the monitor are the same on your keyboard.
 
-Rumour has it that someone left a backdoor on the time sharing box. The manual page has a
-section called BUGS.
+### Shall we play a game?
+
+Rumour has it that a professor left a backdoor on the time sharing box, back in 1983. If you
+remember the film, you already know what to do: dial the mainframe with `TERM` and, at the
+`login:` prompt, type the name he gave to his son. If you don't, try logging in as the professor
+himself, or read the BUGS section of `man plot`.
+
+Be polite with the machine, and think twice before choosing a game.
 
 ## Run it locally
 
