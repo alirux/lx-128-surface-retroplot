@@ -91,6 +91,7 @@ tools/hooks/install.sh
 | `privacy.html`, `licence.html` | privacy and licence notices, as man pages |
 | `fonts/` | the two typefaces, served from the site |
 | `assets/` | screenshots and social card |
+| `favicon.svg`, `favicon.ico`, `apple-touch-icon.png` | the LX-128 in pixel art |
 
 ## Licence
 

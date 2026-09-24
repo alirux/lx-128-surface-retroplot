@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" shape-rendering="crispEdges">
+  <!-- LX-128 monitor: dark case, light green border, dark grey screen -->
+  <rect x="1" y="1" width="30" height="25" fill="#1d1c1a"/>
+  <rect x="2" y="2" width="28" height="23" fill="#2d2b28"/>
+  <rect x="3" y="3" width="26" height="19" fill="#9ad284"/>
+  <rect x="5" y="5" width="22" height="15" fill="#444444"/>
+  <!-- a wireframe peak, the sombrero seen from the side -->
+  <g fill="#9ad284">
+    <rect x="6" y="17" width="3" height="1"/>
+    <rect x="9" y="16" width="2" height="1"/>
+    <rect x="11" y="15" width="1" height="1"/>
+    <rect x="12" y="13" width="1" height="2"/>
+    <rect x="13" y="10" width="1" height="3"/>
+    <rect x="14" y="8" width="1" height="2"/>
+    <rect x="17" y="8" width="1" height="2"/>
+    <rect x="18" y="10" width="1" height="3"/>
+    <rect x="19" y="13" width="1" height="2"/>
+    <rect x="20" y="15" width="1" height="1"/>
+    <rect x="21" y="16" width="2" height="1"/>
+    <rect x="23" y="17" width="3" height="1"/>
+  </g>
+  <rect x="15" y="7" width="2" height="1" fill="#ffffff"/>
+  <!-- the floor grid -->
+  <g fill="#6c6c6c">
+    <rect x="6" y="18" width="20" height="1"/>
+  </g>
+  <!-- rainbow badge and power led -->
+  <rect x="4" y="23" width="1" height="1" fill="#d8342c"/>
+  <rect x="5" y="23" width="1" height="1" fill="#f2b21c"/>
+  <rect x="6" y="23" width="1" height="1" fill="#3fae3f"/>
+  <rect x="7" y="23" width="1" height="1" fill="#2e9bd6"/>
+  <rect x="27" y="23" width="1" height="1" fill="#ff3b2f"/>
+  <!-- stand -->
+  <rect x="12" y="26" width="8" height="3" fill="#2d2b28"/>
+  <rect x="8" y="29" width="16" height="2" fill="#1d1c1a"/>
+</svg>

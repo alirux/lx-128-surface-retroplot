@@ -449,13 +449,19 @@
   ];
 
   function help() {
-    if (isTty()) return print(HELP_SHELL.join('\n'));
+    // The build number comes from the footer, which the pre-commit hook keeps up to date.
+    const build = ((document.querySelector('.version') || {}).textContent || '').replace(/^v/i, '');
+    if (isTty()) {
+      print(HELP_SHELL.join('\n'));
+      // Man page footer: system on the left, build in the middle, page on the right.
+      const w = HELP_SHELL[0].length, mid = `build ${build}`, l = 'LIRUX 4.3 BSoD', r = 'PLOT(1)';
+      const gap = Math.floor((w - mid.length) / 2) - l.length;
+      return print('\n' + l + ' '.repeat(Math.max(1, gap)) + mid + r.padStart(w - l.length - Math.max(1, gap) - mid.length));
+    }
     const extra = state.machine === 'c128'
       ? '  GO64  TERM (DIAL THE MAINFRAME)  RESET'
       : '  TERM (DIAL THE MAINFRAME)\n  RESET (BACK TO 128 MODE)';
-    // The build number comes from the footer, which the pre-commit hook keeps up to date.
-    const v = (document.querySelector('.version') || {}).textContent || '';
-    print(`LX-128 SURFACE RETROPLOT  BUILD ${v.replace(/^v/i, '')}\n`, 'center');
+    print(`LX-128 SURFACE RETROPLOT  BUILD ${build}\n`, 'center');
     print(HELP_BASIC.concat(extra, '', 'SHALL WE PLAY A GAME? TERM, THEN LOGIN').join('\n'));
   }
 
