@@ -1,0 +1,102 @@
+# LX-128 Surface Retroplot
+
+Type a formula, get a 3D surface. Real or complex. Like it's 1985.
+
+**[Try it live: alirux.github.io/lx-128-surface-retroplot](https://alirux.github.io/lx-128-surface-retroplot/)**
+
+![The LX-128 in 128 mode, drawing sin(x)*cos(y) as a green wireframe](assets/screenshot-128.png)
+
+A 3D function plotter disguised as an 80s home computer with its monitor. You type
+`sin(x)*cos(y)` at the `READY.` prompt and the machine draws the surface with chunky pixels,
+ordered dithering and hidden line removal, on a screen with scanlines and phosphor glow.
+
+It is a single static page: plain HTML, CSS and JavaScript, no build step, no dependencies, no
+network calls. The surface is rasterised in software into a tiny pixel buffer and only scaled up
+by the browser.
+
+## Three machines, one plotter
+
+| 128 mode | 64 mode | Amber terminal |
+|---|---|---|
+| ![128 mode](assets/screenshot-128.png) | ![64 mode, a complex function in blue](assets/screenshot-64.png) | ![The amber terminal with an animated ripple](assets/screenshot-terminal.png) |
+| Light green on dark grey, 80 column hi-res: twice the pixels both ways. The machine you boot into. | Light blue on blue, 40 columns, big square pixels. Type `GO64` and answer `Y`. `RESET` brings you back. | A serial terminal dialled into a time sharing box, in amber, lowercase. Type `TERM`, log in, `exit` to hang up. |
+
+## Formulas
+
+Type a formula and press RETURN.
+
+- **Real surfaces** `z = f(x, y)`: `sin(x)*cos(y)`, `x^3-3x*y^2`, `sin(r)/r`
+- **Complex functions** `w = f(z)`: as soon as a formula uses `z` or `i`, the height becomes
+  `|w|` and the brightness follows the argument of `w` (monochrome domain colouring):
+  `1/(z^2+1)`, `gamma(z)`, `log(z)`
+- **Animations**: use `t`, the time in seconds: `cos(r-2t)*exp(-r/6)`
+
+Variables: `x y r th t` and, for complex functions, `z i`. Constants: `pi e tau phi`.
+
+Implicit products work as on paper (`2x`, `xy`, `x(y+1)`), and so do `|x|`, `n!` and
+`sin x`. Functions: `sin cos tan asin acos atan sinh cosh tanh sec csc cot exp log ln log10
+log2 sqrt cbrt abs sign floor ceil round gamma re im arg conj min max atan2 mod pow hypot`.
+
+The formula is kept in the address after `#`, so a link shares a plot:
+[`#sin(x^2+y^2-t)/(1+x^2+y^2)`](https://alirux.github.io/lx-128-surface-retroplot/#sin(x%5E2%2By%5E2-t)%2F(1%2Bx%5E2%2By%5E2)).
+
+## Commands
+
+| Command | What it does |
+|---|---|
+| `HELP` / `man plot` | list of commands |
+| `RUN` | draw the plot again |
+| `RANGE A B [C D]` | x (and y) range |
+| `ZRANGE A B` / `ZRANGE AUTO` | height range, automatic clipping of poles by default |
+| `GRID N` | mesh size, 8 to 96 |
+| `STYLE WIRE\|SOLID\|MESH\|DOTS` | rendering style |
+| `VIEW ABS\|LOG\|RE\|IM` | height of complex functions |
+| `SPIN [ON\|OFF]`, `HOME` | rotation and view reset |
+| `DEMO [N]` | eleven demos, from the sombrero to the gamma function |
+| `LIST`, `FUNCS`, `SAVE`, `CLS` | listing, functions, PNG export, clear screen |
+| `GO64`, `RESET`, `TERM` | switch machine |
+
+Drag to rotate, use the wheel to zoom, or the arrow keys on the plot. The F1 to F8 keys under
+the monitor are the same on your keyboard.
+
+Rumour has it that someone left a backdoor on the time sharing box. The manual page has a
+section called BUGS.
+
+## Run it locally
+
+Any static web server will do, for example:
+
+```
+python3 -m http.server 8765
+```
+
+and open <http://localhost:8765>. Opening `index.html` straight from the disk works too.
+
+## Project layout
+
+| Path | Content |
+|---|---|
+| `index.html`, `style.css` | the page, the monitor and the three screen themes |
+| `js/parser.js` | formula parser, real and complex arithmetic, gamma function |
+| `js/render.js` | software rasteriser: z-buffer, dithering, bitmap font |
+| `js/app.js` | the machines: command line, boot sequences, keys, easter egg |
+| `privacy.html`, `licence.html` | privacy and licence notices, as man pages |
+| `fonts/` | the two typefaces, served from the site |
+| `assets/` | screenshots and social card |
+
+## Licence
+
+Two licences, as for the rest of my site:
+
+- the **code** (`js/`, `style.css`, the HTML markup) is under the
+  [Apache License 2.0](LICENSE);
+- the **content** (the visual design of the monitor and of the screens, the texts, the
+  screenshots and the social card) is under
+  [CC BY-NC-SA 4.0](LICENSE-CONTENT.txt).
+
+The typefaces [Press Start 2P](fonts/OFL-PressStart2P.txt) and [VT323](fonts/OFL-VT323.txt)
+belong to their authors and come with the SIL Open Font License 1.1. Details in
+[NOTICE](NOTICE) and on the [licence page](https://alirux.github.io/lx-128-surface-retroplot/licence.html).
+
+Made by Alberto "lirux" Lirussi: [GitHub](https://github.com/alirux) ·
+[LinkedIn](https://www.linkedin.com/in/alberto-lirussi/)
