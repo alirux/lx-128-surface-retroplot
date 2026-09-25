@@ -47,7 +47,7 @@
 
             <h2>WHAT YOU TYPE</h2>
             <p>Formulas, commands and the names you type at the <code>login:</code> prompt are handled
-              only by the page, on your device. None of them is sent to a server or saved.</p>
+              only by the page, on your device. None of them is sent to a server.</p>
             <p>The last formula is written in the page address, after the <code>#</code> sign, so you can
               share a plot by copying the link. Browsers never send that part of the address to the
               server.</p>
@@ -62,9 +62,18 @@
               <dt>lirux3d.home</dt>
               <dd>the computer the terminal was dialled from, to go back to it on logout</dd>
             </dl>
-            <p>They contain no identifier, stay in your browser, are sent to no one, and you can delete
-              them at any time from your browser settings. They are technical preferences needed to
-              give you the page the way you left it, so they require no consent.</p>
+            <p>When you leave the plotter for another page of the site, for instance with
+              <code>man history</code>, it also keeps a copy of your session in the session storage of
+              the browser tab, so that you find it as you left it on return:</p>
+            <dl>
+              <dt>lirux3d.session</dt>
+              <dd>the text on the screen, the commands you typed, the name you logged in with, the
+                formula and the view; it is read back and deleted as soon as you return, and the
+                browser erases it anyway when you close the tab</dd>
+            </dl>
+            <p>None of these values contains an identifier. They stay in your browser, are sent to no
+              one, and you can delete them at any time from your browser settings. They are technical
+              data needed to give you the page the way you left it, so they require no consent.</p>
 
             <h2>SERVER LOGS</h2>
             <p>The site is hosted on GitHub Pages, a service of GitHub, Inc. Like any web server, GitHub's
@@ -159,7 +168,7 @@
     </nav>
 
     <footer class="credits">
-      <span class="version">v17</span>
+      <span class="version">v18</span>
       <span>&copy; 2026 ALBERTO "LIRUX" LIRUSSI</span>
       <a href="history.html">HISTORY</a>
       <a href="maths.html">MATHS</a>

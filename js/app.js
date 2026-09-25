@@ -1117,6 +1117,56 @@
     print('READY.\nTYPE HELP FOR COMMANDS, F5 FOR DEMOS');
   }
 
+  /* ---------- session: survive a trip to another page ---------- */
+
+  // When the page is left (man history, a footer link...) the session is kept
+  // in this browser tab only, and given back on return. A reload boots afresh.
+  const SESSION_KEY = 'lirux3d.session';
+  const KEEP = ['range', 'zrange', 'grid', 'style', 'view', 'yaw', 'pitch', 'zoom', 'spin', 'demo'];
+
+  function saveSession() {
+    if (busy || pending || wopr || loginPrompt) return;
+    const snap = {
+      machine: state.machine, home: state.home, user, src: state.src, textMode,
+      state: Object.fromEntries(KEEP.map(k => [k, state[k]])),
+      out: [...out.childNodes].slice(-150).map(d => [d.textContent, d.className]),
+      hist: history_.slice(-50),
+    };
+    try { sessionStorage.setItem(SESSION_KEY, JSON.stringify(snap)); } catch (e) { /* storage off */ }
+  }
+
+  function takeSession() {
+    let snap = null;
+    try {
+      snap = JSON.parse(sessionStorage.getItem(SESSION_KEY));
+      sessionStorage.removeItem(SESSION_KEY);
+    } catch (e) { return null; }
+    const nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+    if (nav && nav.type === 'reload') return null;
+    return snap && has(MACHINES, snap.machine) ? snap : null;
+  }
+
+  function restoreSession(snap) {
+    Object.assign(state, snap.state);
+    state.home = snap.home === 'c64' ? 'c64' : 'c128';
+    user = snap.user || 'guest';
+    setMachine(snap.machine);
+    cls();
+    snap.out.forEach(([text, cls_]) => print(text, cls_ || undefined));
+    history_.push(...snap.hist);
+    hIdx = history_.length;
+    if (snap.src) plot(snap.src, true);
+    tapeUntil = 0;
+    if (snap.textMode) setTextMode(true);
+    updateMirror();
+  }
+
+  window.addEventListener('pagehide', saveSession);
+  // Back from the browser cache: everything is still here, the copy is not needed.
+  window.addEventListener('pageshow', e => {
+    if (e.persisted) { try { sessionStorage.removeItem(SESSION_KEY); } catch (err) { /* storage off */ } }
+  });
+
   /* ---------- start ---------- */
 
   const savedHome = store.get('lirux3d.home');
@@ -1126,6 +1176,8 @@
   updateMirror();
   requestAnimationFrame(frame);
   if (window.matchMedia('(pointer: fine)').matches) cmd.focus({ preventScroll: true });
-  sequence(boot);
+  const session = takeSession();
+  if (session) restoreSession(session);
+  else sequence(boot);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
 })();
