@@ -86,6 +86,19 @@ The same notes are on the [history page](https://alirux.github.io/lx-128-surface
   terminal I used at school, in the computer lab;
 - [WarGames](https://en.wikipedia.org/wiki/WarGames): the 1983 film behind the easter egg.
 
+### DLOAD or LOAD?
+
+At boot the machine loads the `SURFACE` program from disk, and the command depends on the mode:
+
+- in **128 mode** it types `DLOAD"SURFACE"`, the native disk command of BASIC 7.0: it loads a
+  BASIC program from drive 8 without having to name the device. The classic `LOAD"SURFACE",8`
+  works on the 128 too, but `DLOAD` is what 128 users typed every day;
+- in **64 mode** BASIC V2 has no disk commands of its own, so it types `LOAD"SURFACE",8,1`.
+
+Strictly speaking the final `,1` loads a file at the address stored in the file itself, which
+mattered for machine code and games: a BASIC program like `SURFACE` would only need
+`LOAD"SURFACE",8`. The page keeps `,8,1` anyway, because it is the form everybody remembers.
+
 ## Run it locally
 
 Any static web server will do, for example:
