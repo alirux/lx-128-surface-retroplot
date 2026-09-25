@@ -39,9 +39,11 @@
 
   let user = 'guest';
   let loginPrompt = false; // waiting for a name after login:
+  let passwordPrompt = false; // waiting for a password: nothing typed is shown
   let wopr = null; // step of the conversation with the war games computer, when connected to it
   const prompt = () => {
     if (!isTty() || wopr) return '';
+    if (passwordPrompt) return 'Password: ';
     return loginPrompt ? 'login: ' : `${user}@lirux:~$ `;
   };
 
@@ -109,7 +111,8 @@
   }
 
   function updateMirror() {
-    const v = cmd.value;
+    // Like a real terminal, the password is not echoed: only the cursor shows.
+    const v = passwordPrompt ? '' : cmd.value;
     const p = cmd.selectionStart == null ? v.length : cmd.selectionStart;
     mirror.textContent = prompt();
     mirror.append(document.createTextNode(v.slice(0, p)));
@@ -651,7 +654,7 @@
 
   function exec(line) {
     const raw = line.trim();
-    print(prompt() + line);
+    print(prompt() + (passwordPrompt ? '' : line));
     if (pending) {
       const p = pending;
       pending = null;
@@ -925,16 +928,24 @@
     updateMirror();
     pending = name => {
       const n = name.toLowerCase().replace(/[^a-z0-9_-]/g, '');
+      // As in the film, the backdoor needs no password.
       if (n === 'joshua') sequence(woprConnect);
-      else if (n === 'falken') sequence(falkenHint);
-      else sequence(() => loginAs(n || 'guest'));
+      else askPassword(n || 'guest');
+    };
+  }
+
+  // Any password will do, even an empty one: the box has no real accounts.
+  function askPassword(name) {
+    passwordPrompt = true;
+    updateMirror();
+    pending = () => {
+      passwordPrompt = false;
+      sequence(name === 'falken' ? falkenHint : () => loginAs(name));
     };
   }
 
   // The professor himself cannot log in, but he points at the backdoor.
   async function falkenHint() {
-    await sleep(350);
-    print('Password:');
     await sleep(700);
     print('Login incorrect');
     print('hint: the professor named his backdoor after his son\n');
@@ -943,8 +954,6 @@
 
   async function loginAs(name) {
     user = name;
-    await sleep(350);
-    print('Password:');
     await sleep(500);
     print('Last login: Wed Sep 23 22:41:07 1987 from lirux');
     print('LIRUX 4.3 BSoD: Thu Jan 29 1987\n');
