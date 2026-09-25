@@ -443,6 +443,9 @@
     '  spin [on|off]  home  demo [N|NAME]  ls  cat',
     '  funcs  save [NAME]  clear  exit',
     '',
+    'see also: man history, man maths, man privacy, man licence',
+    '          man (with no page) lists them all',
+    '',
     'BUGS',
     '  Prof. Falken left a backdoor account on this box.',
     '  Nobody remembers its name. Try logging in as him.',
@@ -597,10 +600,38 @@
     reset: () => sequence(hardReset),
   };
 
+  const MAN_LIST = [
+    ['plot(1)', 'commands and formula syntax'],
+    ['history(7)', 'the 128 at home, the VT220 at school, WarGames'],
+    ['maths(7)', 'surfaces, complex numbers, zeros, poles, branch cuts'],
+    ['privacy(7)', 'what the page does with your data'],
+    ['licence(7)', 'licences of the code and of the content'],
+  ];
+  const MAN_PAGES = {
+    history: 'history.html',
+    maths: 'maths.html',
+    math: 'maths.html',
+    privacy: 'privacy.html',
+    licence: 'licence.html',
+    license: 'licence.html',
+  };
+
   // Commands that only exist on the time-sharing box.
   const SHELL_COMMANDS = {
     clear: cls,
-    man: help,
+    // plot(1) is shown here; the other manual pages are pages of the site.
+    man(a) {
+      const page = (a[0] || '').replace(/\(\d\)$/, '');
+      if (!page || page === 'man' || page === '-k') {
+        return print('What manual page do you want? Available pages:\n' +
+          MAN_LIST.map(([n, d]) => '  ' + n.padEnd(13) + d).join('\n'));
+      }
+      if (page === 'plot') return help();
+      const url = MAN_PAGES[page];
+      if (!url) return print(`No manual entry for ${page}`);
+      print(`Formatting ${page}(7), please wait...`);
+      setTimeout(() => { location.href = url; }, 600);
+    },
     exit: () => sequence(logout),
     logout: () => sequence(logout),
     ls: () => print(DEMOS.map(d => (d.name + '.fn').padEnd(13)).join('').replace(/(.{65})/g, '$1\n').trimEnd()),

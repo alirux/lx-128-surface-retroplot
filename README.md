@@ -59,6 +59,20 @@ The formula is kept in the address after `#`, so a link shares a plot:
 Drag to rotate, use the wheel to zoom, or the arrow keys on the plot. The F1 to F8 keys under
 the monitor are the same on your keyboard.
 
+### Man pages
+
+The amber terminal and the pages of the site speak the same language: manual pages. In the terminal `man` alone lists them, `man plot` is shown on screen and the others open the corresponding page of the site.
+
+| Page | Where | What it covers |
+|---|---|---|
+| `plot(1)` | type `man plot` (or F1) in the amber terminal | commands and formula syntax |
+| `history(7)` | `man history` in the amber terminal, or [history.html](https://alirux.github.io/lx-128-surface-retroplot/history.html) | the 128 at home, the VT220 at school, WarGames |
+| `maths(7)` | `man maths` in the amber terminal, or [maths.html](https://alirux.github.io/lx-128-surface-retroplot/maths.html) | surfaces, complex numbers, domain colouring, zeros, poles and branch cuts |
+| `privacy(7)` | `man privacy` in the amber terminal, or [privacy.html](https://alirux.github.io/lx-128-surface-retroplot/privacy.html) | what the page does with your data |
+| `licence(7)` | `man licence` in the amber terminal, or [licence.html](https://alirux.github.io/lx-128-surface-retroplot/licence.html) | Apache 2.0 for the code, CC BY-NC-SA 4.0 for the content |
+
+In 128 and 64 mode the same commands as `plot(1)` are listed by `HELP`.
+
 ### Shall we play a game?
 
 Rumour has it that a professor left a backdoor on the time sharing box, back in 1983. If you
@@ -99,6 +113,40 @@ Strictly speaking the final `,1` loads a file at the address stored in the file 
 mattered for machine code and games: a BASIC program like `SURFACE` would only need
 `LOAD"SURFACE",8`. The page keeps `,8,1` anyway, because it is the form everybody remembers.
 
+## The maths behind it
+
+A real formula `z = f(x, y)` is the graph of a function of two variables: the plotter samples it
+on a grid and joins the samples into a mesh. `r` and `th` are the polar coordinates of the point,
+`t` is the time.
+
+A complex formula `w = f(z)` would need four dimensions to be drawn honestly, two for `z` and
+two for `w`. The plotter keeps `z = x + iy` on the floor of the box (the RE and IM axes) and
+squeezes `w` into the other two:
+
+- the **height** is the modulus `|w|`, its distance from zero (`VIEW RE`, `VIEW IM` and
+  `VIEW LOG` show the real part, the imaginary part or `ln|w|` instead);
+- the **brightness**, in the SOLID and MESH styles, follows the argument of `w`, the angle it
+  makes with the positive real axis: this is domain colouring with a single phosphor instead of
+  a rainbow.
+
+On such a surface a few landmarks stand out: **zeros**, where the surface touches the floor
+(`z^3-1`), **poles**, where it shoots up forever and gets clipped (`1/(z^2+1)`), and **branch
+cuts**, where functions like `log(z)` or `sqrt(z)` jump because only their principal value is
+used (try `log(z)` with `VIEW IM`). `gamma(z)` extends the factorial, `gamma(n+1) = n!`, and is
+computed with the Lanczos approximation.
+
+The [maths page](https://alirux.github.io/lx-128-surface-retroplot/maths.html) of the plotter
+explains all this in more detail. Further reading on Wikipedia:
+[complex numbers](https://en.wikipedia.org/wiki/Complex_number),
+[complex analysis](https://en.wikipedia.org/wiki/Complex_analysis),
+[domain colouring](https://en.wikipedia.org/wiki/Domain_coloring),
+[zeros and poles](https://en.wikipedia.org/wiki/Zeros_and_poles),
+[branch points](https://en.wikipedia.org/wiki/Branch_point),
+[complex logarithm](https://en.wikipedia.org/wiki/Complex_logarithm),
+[gamma function](https://en.wikipedia.org/wiki/Gamma_function),
+[z-buffering](https://en.wikipedia.org/wiki/Z-buffering) and
+[ordered dithering](https://en.wikipedia.org/wiki/Ordered_dithering).
+
 ## Run it locally
 
 Any static web server will do, for example:
@@ -136,6 +184,7 @@ Headers such as `X-Frame-Options`, `X-Content-Type-Options`, `Permissions-Policy
 | `js/app.js` | the machines: command line, boot sequences, keys, easter egg |
 | `js/analytics.js` | anonymous visit counting with GoatCounter |
 | `history.html` | the historical notes behind the project, as a man page |
+| `maths.html` | the mathematics behind the plotter, as a man page |
 | `privacy.html`, `licence.html` | privacy and licence notices, as man pages |
 | `fonts/` | the two typefaces, served from the site |
 | `assets/` | screenshots and social card |
