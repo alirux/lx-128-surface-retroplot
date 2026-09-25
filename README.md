@@ -82,7 +82,7 @@ The machines it pays homage to:
 - [Commodore 64](https://en.wikipedia.org/wiki/Commodore_64): the 64 mode, light blue on blue,
   with its famous startup banner;
 - [VT100](https://en.wikipedia.org/wiki/VT100): the amber serial terminal, a window on the Unix
-  machines of the time;
+  machines of the time. It is the terminal I used at school, in the computer lab;
 - [WarGames](https://en.wikipedia.org/wiki/WarGames): the 1983 film behind the easter egg.
 
 ## Run it locally
