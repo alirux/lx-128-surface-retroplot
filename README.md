@@ -68,6 +68,23 @@ himself, or read the BUGS section of `man plot`.
 
 Be polite with the machine, and think twice before choosing a game.
 
+## Inspiration
+
+Why a 3D function plotter? Because when I had my Commodore 128 (I still have it!) plotting
+mathematical surfaces was one of my favourite nerd projects: a few lines of BASIC, a formula, and
+then a long wait while the wireframe slowly appeared on the screen, line after line. This page is
+the same idea, only much faster.
+
+The machines it pays homage to:
+
+- [Commodore 128](https://en.wikipedia.org/wiki/Commodore_128): the 128 mode, with its 80 column
+  hi-res screen, the light green on dark grey colours and `GO64`;
+- [Commodore 64](https://en.wikipedia.org/wiki/Commodore_64): the 64 mode, light blue on blue,
+  with its famous startup banner;
+- [VT100](https://en.wikipedia.org/wiki/VT100): the amber serial terminal, a window on the Unix
+  machines of the time;
+- [WarGames](https://en.wikipedia.org/wiki/WarGames): the 1983 film behind the easter egg.
+
 ## Run it locally
 
 Any static web server will do, for example:
