@@ -140,5 +140,5 @@ The typefaces [Press Start 2P](fonts/OFL-PressStart2P.txt) and [VT323](fonts/OFL
 belong to their authors and come with the SIL Open Font License 1.1. Details in
 [NOTICE](NOTICE) and on the [licence page](https://alirux.github.io/lx-128-surface-retroplot/licence.html).
 
-Made by Alberto "lirux" Lirussi: [GitHub](https://github.com/alirux) ·
+Made by Alberto "lirux" Lirussi: [GitHub](https://alirux.github.io/) ·
 [LinkedIn](https://www.linkedin.com/in/alberto-lirussi/)
