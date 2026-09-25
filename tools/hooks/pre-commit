@@ -35,7 +35,7 @@ current=$(tr -cd '0-9' < "$version_file" 2>/dev/null || true)
 next=$((current + 1))
 
 printf '%s\n' "$next" > "$version_file"
-for page in index.html privacy.html licence.html; do
+for page in index.html privacy.html licence.html history.html; do
   perl -0pi -e 's{(<span class="version">)v\d+}{${1}v'"$next"'}' "$root/$page"
   git add "$root/$page"
 done

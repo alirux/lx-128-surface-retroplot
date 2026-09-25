@@ -75,7 +75,7 @@ mathematical surfaces was one of my favourite nerd projects: a few lines of BASI
 then a long wait while the wireframe slowly appeared on the screen, line after line. This page is
 the same idea, only much faster.
 
-The machines it pays homage to:
+The same notes are on the [history page](https://alirux.github.io/lx-128-surface-retroplot/history.html) of the plotter. The machines it pays homage to:
 
 - [Commodore 128](https://en.wikipedia.org/wiki/Commodore_128): the 128 mode, with its 80 column
   hi-res screen, the light green on dark grey colours and `GO64`;
@@ -122,6 +122,7 @@ Headers such as `X-Frame-Options`, `X-Content-Type-Options`, `Permissions-Policy
 | `js/render.js` | software rasteriser: z-buffer, dithering, bitmap font |
 | `js/app.js` | the machines: command line, boot sequences, keys, easter egg |
 | `js/analytics.js` | anonymous visit counting with GoatCounter |
+| `history.html` | the historical notes behind the project, as a man page |
 | `privacy.html`, `licence.html` | privacy and licence notices, as man pages |
 | `fonts/` | the two typefaces, served from the site |
 | `assets/` | screenshots and social card |
